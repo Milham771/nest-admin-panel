@@ -1,0 +1,32 @@
+<div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-4">
+        <div class="card p-5 shadow-sm border-0" style="border-radius: 20px;">
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">Welcome Back</h3>
+                <p class="text-muted small">Please enter your details to sign in.</p>
+            </div>
+            
+            <form action="/auth/login" method="POST">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-uppercase">Username</label>
+                    <input type="text" name="username" class="form-control bg-light border-0 py-2" placeholder="Your username" required>
+                </div>
+                <div class="mb-4">
+                    <label class="form-label small fw-bold text-uppercase">Password</label>
+                    <input type="password" name="password" class="form-control bg-light border-0 py-2" placeholder="••••••••" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary py-2 fw-semibold">Sign In</button>
+                </div>
+            </form>
+            
+            <div class="mt-4 text-center">
+                <p class="text-muted small mb-0">Don't have an account? <br> <span class="fw-bold text-dark">Contact Administrator</span></p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="/" class="text-decoration-none text-muted small">← Back to Home</a>
+        </div>
+    </div>
+</div>
