@@ -23,12 +23,17 @@ async function bootstrap() {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use((req: any, res: any, next: any) => {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    next();
+  });
+
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
   app.setViewEngine('hbs');
   app.set('view options', { layout: 'layout' });
 
-    const hbs = require('hbs');
+  const hbs = require('hbs');
   hbs.registerHelper('gt', (a, b) => a > b);
   hbs.registerHelper('eq', (a, b) => a === b);
 
