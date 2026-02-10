@@ -34,11 +34,13 @@ export class CategoryService {
   }
 
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async update(id: number, updateCategoryDto: UpdateCategoryDto) {
+    await this.categoryRepository.update(id, updateCategoryDto);
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async remove(id: number) {
+    await this.categoryRepository.delete(id);
+    return { deleted: true };
   }
 }

@@ -13,6 +13,7 @@ async function bootstrap() {
 
   const hbs = require('hbs');
   hbs.registerHelper('gt', (a, b) => a > b);
+  hbs.registerHelper('eq', (a, b) => a === b);
 
   await app.listen(process.env.PORT ?? 3000);
 }

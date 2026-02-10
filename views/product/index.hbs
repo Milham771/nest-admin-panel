@@ -29,7 +29,12 @@
                 <td class="fw-semibold">${{this.price}}</td>
                 <td>{{this.stock}}</td>
                 <td class="text-end">
-                    <button class="btn btn-light btn-sm border">Edit</button>
+                    <div class="btn-group">
+                        <a href="/product/{{this.id}}/edit" class="btn btn-light btn-sm border text-primary">Edit</a>
+                        <form action="/product/{{this.id}}/delete" method="POST" class="d-inline" onsubmit="return confirm('Delete this product?')">
+                            <button type="submit" class="btn btn-light btn-sm border text-danger">Delete</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             {{/each}}

@@ -40,4 +40,26 @@ export class CategoryController {
       category
     };
   }
+
+  @Get(':id/edit')
+  @Render('category/edit')
+  async edit(@Param('id') id: string) {
+    const category = await this.categoryService.findOne(+id);
+    return {
+      title: 'Edit Category',
+      category
+    };
+  }
+
+  @Post(':id/update')
+  async update(@Param('id') id: string, @Body() body: any, @Res() res) {
+    await this.categoryService.update(+id, body);
+    return res.redirect('/category');
+  }
+
+  @Post(':id/delete')
+  async remove(@Param('id') id: string, @Res() res) {
+    await this.categoryService.remove(+id);
+    return res.redirect('/category');
+  }
 }

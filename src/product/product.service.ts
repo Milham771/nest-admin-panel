@@ -38,4 +38,21 @@ export class ProductService {
       relations: ['category'],
     });
   }
+
+  async update(id: number, productData: any) {
+    const { categoryId, ...rest } = productData;
+    if (categoryId) {
+      const category = await this.categoryRepository.findOneBy({ id: categoryId });
+      if (category) {
+        rest.category = category;
+      }
+    }
+    await this.productRepository.update(id, rest);
+    return this.findOne(id);
+  }
+
+  async remove(id: number) {
+    await this.productRepository.delete(id);
+    return { deleted: true };
+  }
 }
