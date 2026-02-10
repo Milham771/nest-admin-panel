@@ -4,9 +4,12 @@ import { join } from 'path';
 import { AppModule } from './app.module';
 import session from 'express-session';
 import passport from 'passport';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
   app.use(
     session({
@@ -15,7 +18,7 @@ async function bootstrap() {
       saveUninitialized: false,
       cookie: { maxAge: 3600000 }, 
     }),
-  )
+  );
   
   app.use(passport.initialize());
   app.use(passport.session());
@@ -25,7 +28,7 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   app.set('view options', { layout: 'layout' });
 
-  const hbs = require('hbs');
+    const hbs = require('hbs');
   hbs.registerHelper('gt', (a, b) => a > b);
   hbs.registerHelper('eq', (a, b) => a === b);
 
