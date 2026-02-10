@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Render, Res, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Render, Res, Param, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CategoryService } from '../category/category.service';
 
@@ -11,13 +11,14 @@ export class ProductController {
 
   @Get()
   @Render('product/index')
-  async findAll() {
-    const products = await this.productService.findAll();
+  async findAll(@Query('search') search: string) {
+    const products = await this.productService.findAll(search);
     const categories = await this.categoryService.findAll();
     return {
       title: 'Products',
       products,
       categories,
+      search
     };
   }
 

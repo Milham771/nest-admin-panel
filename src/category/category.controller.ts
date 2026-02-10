@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Render, Res, Query } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -9,11 +9,12 @@ export class CategoryController {
 
   @Get()
   @Render('category/index')
-  async findAll() {
-    const categories = await this.categoryService.findAll();
+  async findAll(@Query('search') search: string) {
+    const categories = await this.categoryService.findAll(search);
     return {
       title: 'Categories',
-      categories
+      categories,
+      search
     };
   }
 
