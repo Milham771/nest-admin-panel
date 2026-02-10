@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Render, Res, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Render, Res, Param, Query, UseGuards } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CategoryService } from '../category/category.service';
+import { AuthenticatedGuard } from '../auth/authenticated.guard';
 
+@UseGuards(AuthenticatedGuard)
 @Controller('product')
 export class ProductController {
   constructor(
