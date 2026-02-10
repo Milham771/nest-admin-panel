@@ -13,6 +13,11 @@ export class HttpExceptionFilter implements ExceptionFilter {
       ? exceptionResponse 
       : exceptionResponse.message || 'Internal server error';
 
+    // Jika error 401 (Unauthorized) dan berasal dari halaman login
+    if (status === 401) {
+      return response.redirect('/auth/login?error=true');
+    }
+
     response.status(status).render('error', {
       title: 'Error Occurred',
       statusCode: status,
