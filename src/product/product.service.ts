@@ -13,10 +13,15 @@ export class ProductService {
     private categoryRepository: Repository<Category>,
   ) {}
 
-  async findAll() {
-    return await this.productRepository.find({
-      relations: ['category'],
-    });
+  async findAll(search?: string) {
+    const query = this.productRepository.createQueryBuilder('product')
+      .leftJoinAndSelect('product.category', 'category');
+
+    if (search) {
+      query.where('product.name LIKE :search', { search: `%${search}%` });
+    }
+
+    return await query.getMany();
   }
 
   async create(productData: any) {

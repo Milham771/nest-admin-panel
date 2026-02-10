@@ -17,10 +17,13 @@ export class CategoryService {
     return await this.categoryRepository.save(category);
   }
 
-  async findAll() {
-    const categories = await this.categoryRepository.find();
-
-    return categories;
+  async findAll(search?: string) {
+    if (search) {
+      return await this.categoryRepository.createQueryBuilder('category')
+        .where('category.name LIKE :search', { search: `%${search}%` })
+        .getMany();
+    }
+    return await this.categoryRepository.find();
   }
 
 

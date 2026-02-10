@@ -1,8 +1,17 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold m-0">Products</h2>
-    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
-        + New Product
-    </button>
+    <div class="d-flex gap-2">
+        <form action="/product" method="GET" class="d-flex gap-2">
+            <input type="text" name="search" class="form-control form-control-sm border-0 bg-white shadow-sm" placeholder="Search products..." value="{{search}}" style="width: 250px;">
+            {{#if search}}
+                <a href="/product" class="btn btn-light btn-sm border shadow-sm">Clear</a>
+            {{/if}}
+            <button type="submit" class="btn btn-dark btn-sm shadow-sm px-3">Search</button>
+        </form>
+        <button class="btn btn-primary btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#addProductModal">
+            + New Product
+        </button>
+    </div>
 </div>
 
 <div class="card overflow-hidden">
