@@ -1,15 +1,18 @@
-import { Controller, Get, Post, Render, UseGuards, Res, Req } from '@nestjs/common';
+import { Controller, Get, Post, Render, UseGuards, Res, Req, Query } from '@nestjs/common';
 import { LocalAuthGuard } from './local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   @Get('login')
   @Render('auth/login')
-  loginPage(@Req() req, @Res() res) {
+  loginPage(@Req() req, @Res() res, @Query('error') error: string) {
     if (req.isAuthenticated()) {
       return res.redirect('/category');
     }
-    return { title: 'Login' };
+    return { 
+      title: 'Login',
+      errorMessage: error ? 'Invalid username or password' : null 
+    };
   }
 
   @UseGuards(LocalAuthGuard)
