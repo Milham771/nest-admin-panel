@@ -65,15 +65,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/category">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/product">Products</a>
-                    </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-outline-dark btn-sm rounded-pill px-3" href="/auth/logout">Logout</a>
-                    </li>
+                    {{#if isAuthenticated}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/category">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/product">Products</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-outline-dark btn-sm rounded-pill px-3" href="/auth/logout">Logout</a>
+                        </li>
+                    {{else}}
+                        <li class="nav-item">
+                            <a class="btn btn-dark btn-sm rounded-pill px-3" href="/auth/login">Login</a>
+                        </li>
+                    {{/if}}
                 </ul>
             </div>
         </div>
