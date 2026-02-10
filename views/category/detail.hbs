@@ -1,0 +1,59 @@
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/category" class="text-decoration-none text-muted">Categories</a></li>
+        <li class="breadcrumb-item active fw-bold text-dark" aria-current="page">{{category.name}}</li>
+    </ol>
+</nav>
+
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card p-4">
+            <h5 class="fw-bold mb-3">Category Info</h5>
+            <div class="mb-3">
+                <label class="small text-muted text-uppercase fw-bold d-block">Name</label>
+                <span class="fs-5 fw-semibold">{{category.name}}</span>
+            </div>
+            <div class="mb-0">
+                <label class="small text-muted text-uppercase fw-bold d-block">Description</label>
+                <p class="mb-0">{{category.description}}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold m-0">Products in this Category</h5>
+            <span class="badge bg-dark rounded-pill px-3">{{category.products.length}} Items</span>
+        </div>
+        
+        <div class="card overflow-hidden">
+            <table class="table m-0">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each category.products}}
+                    <tr>
+                        <td class="fw-semibold">{{this.name}}</td>
+                        <td>${{this.price}}</td>
+                        <td>
+                            <span class="badge {{#if (gt this.stock 10)}}bg-light text-dark{{else}}bg-danger-subtle text-danger{{/if}} border">
+                                {{this.stock}} in stock
+                            </span>
+                        </td>
+                    </tr>
+                    {{/each}}
+                    {{#unless category.products}}
+                    <tr>
+                        <td colspan="3" class="text-center py-5 text-muted">No products assigned to this category.</td>
+                    </tr>
+                    {{/unless}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
